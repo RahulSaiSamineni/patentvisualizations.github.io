@@ -9,6 +9,6 @@ CS 529 Visual Data Science Final Project for Patent Data Visualization
 
 
 ## Development Requirements
-+ Language : Python, D3.js, CSS, Javascript
++ Languages : Python, D3.js, CSS, Javascript
 + IDE : Visual Studio Code
 
