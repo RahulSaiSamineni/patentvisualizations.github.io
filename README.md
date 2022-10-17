@@ -1,2 +1,2 @@
-# Patent_Data_Visualization
+# Patent Data Visualization
 CS 529 Visual Data Science Final Project for Patent Data Visualization
