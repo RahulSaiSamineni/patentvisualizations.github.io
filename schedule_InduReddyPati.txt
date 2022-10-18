@@ -1,0 +1,9 @@
+Preliminary task for first demo:
+
+1) Cleaning of g_cpc_current.tsv and g_location_disambiguated.tsv Datasets.
+2) Working on the System flow.
+3) Implementing Front-End UI.
+4) Confirm with the client about the requirements.
+5) Exploring visual encodings for the data present.
+6) Visualizing patents locations.
+7) Visualizing cpc and cittion networks.
