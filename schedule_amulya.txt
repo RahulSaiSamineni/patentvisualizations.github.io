@@ -1,0 +1,9 @@
+Preliminary task for first demo
+
+1) Cleaning of Patent Dataset.
+2) Working on the System flow
+3) Implement UI Parts -> 
+4) Confirm with the client to get more requirements
+5) Exploring visual encodings for the data present.
+6) Visualizing patents locations
+7) Visualizing Citation networks.
