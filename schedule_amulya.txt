@@ -6,4 +6,4 @@ Preliminary task for first demo
 4) Confirm with the client to get more requirements
 5) Exploring visual encodings for the data present.
 6) Visualizing patents locations
-7) Visualizing Citation networks.
+
