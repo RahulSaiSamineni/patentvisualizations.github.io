@@ -26,7 +26,7 @@ function generateMapStates() {
     var viewByClasses = document.getElementById('map_cpc_classes');
     var valueAge = viewByClasses.options[viewByClasses.selectedIndex].value;
     console.log('value_selection',valueAge);
-    d3.csv(states_data, function(data) {g
+    d3.csv(states_data, function(data) {
         var dataArray = [];
         var maxVal = 0
         for (var d = 0; d < data.length; d++) {
