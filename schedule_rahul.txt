@@ -1,9 +1,9 @@
 Preliminary task for first demo
 
-1) Cleaning of citation Dataset.
-2) Working on the System flow
-3) Implement UI Parts -> 
-4) Confirm with the client to get more requirements
-5) Exploring visual encodings for the data present.
-6) Visualizing patents locations and CPC categories.
-7) Visualizing Citation networks.
+1) Cleaning of Assignee Dataset.
+2) Working on the System flow -5hrs
+3) Implement UI Parts -5hrs 
+4) Confirm with the client to get more requirements -5hrs
+5) Exploring visual encodings for the data present -5hrs.
+6) Visualizing top 5 Companies for every years in patents publishing -5hrs.
+7) Visualizing stock price trend of companies trough years -5hrs.
