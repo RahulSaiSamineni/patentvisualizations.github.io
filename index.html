@@ -235,6 +235,36 @@ div.tooltip {
     </div>
   </div>
 
+  <!--  Container that visualizes the Impact on assigness based on the published patents wrt Stock Price.
+  -->
+  <div id="assigne_stock">
+    <h4>Impact on assigness based on the published patents wrt Stock Price</h4>
+
+    <!-- Dropdown to select the period of years -->
+    <label for="dropdown">Year Period:</label>
+    <select id="Years" name="Years">
+        <option value="">--Select a Year--</option>
+        <option value="A">1985-1990</option>
+        <option value="B">1990-1995</option>
+        <option value="C">1995-2000</option>
+        <option value="D">2000-2005</option>
+        <option value="E">2005-2010</option>
+        <option value="F">2010-2015</option>
+        <option value="G">2015-2020</option>
+        <option value="H">2020-2025</option>
+    </select>
+    <!-- Displays the top orgs in the selected year period in bubble chart -->
+    <div id="assigne_bubble">
+      <img src="images/bubble.png" alt="bubble" style="width: 300px;height:300px;">
+    </div>
+
+    <!-- Displays the trends of patents counts wrt to stock price using line on bar chart -->
+    <div id="assignee_line">
+      <img src="images/Line-bar.png" alt="line" style="width: 300px;height:300px;">
+    </div>
+  </div>
+
+
 <script>
 
   $(document).ready(function(){
