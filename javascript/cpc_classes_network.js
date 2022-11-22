@@ -128,5 +128,76 @@ function createForceNetwork(nodes, edges) {
         .style("padding", "5px")
         .style("color", "white")
 
+    // simulation.restart();
+
+    function nodeMove(d){
+        tooltip_network
+            .style("left", (d3.mouse(this)[0]+30) + "px")
+            .style("top", (d3.mouse(this)[1]+30) + "px")
+    }
+
+    function nodeClick(d) {
+        generate_onlick_heatMap(d);
+        // d.fixed = true;
+    }
+
+    function nodeDoubleClick(d) {
+        
+        // d.fixed = false;
+    }
+
+    function nodeOver(d) {
+        
+        // simulation.stop();
+        tooltip_network
+            .transition()
+            .duration(200)
+            tooltip_network
+            .style("opacity", 1)
+            .style("position", 'absolute')
+            .html("CPC Class: " + d.label + "<br>" + "Name: " + cpc_class_name[d.label])
+            .style("left", (d3.mouse(this)[0]+30) + "px")
+            .style("top", (d3.mouse(this)[1]+30) + "px")
+            highlightEgoNetwork(d);
+    }
+
+    function nodeOut() {
+        simulation.restart();
+        tooltip_network
+            // .transition()
+            // .duration(200)
+            .style("opacity", 0)
+        d3.selectAll("g.node > circle")
+        .style("fill", "#fee0d2")
+        .style("stroke", "#de2d26")
+        .style("stroke-width", "1px");
+
+        d3.selectAll("line")
+        .style("stroke", "#fc9272")
+        .style("stroke-width", "1px");
+    }
+
+    function highlightEgoNetwork(d) {
+        var egoIDs = [];
+        var filteredEdges = edges.filter(function (p) {return p.source == d || p.target == d});
+
+        filteredEdges
+        .forEach(function (p) {
+        if (p.source == d) {
+            egoIDs.push(p.target.id)
+        }
+        else {
+            egoIDs.push(p.source.id)
+        }
+        });
+
+        d3.selectAll("line").filter(function (p) {return filteredEdges.indexOf(p) > -1})
+        .style("stroke", "#9ebcda")
+        .style("stroke-width", "3px");
+
+        d3.selectAll("circle").filter(function (p) {return egoIDs.indexOf(p.id) > -1})
+        .style("fill", "#e0ecf4")
+        .style("stroke", "#8856a7")
+        .style("stroke-width", "2px");
     }
 }
