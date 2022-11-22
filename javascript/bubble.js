@@ -216,3 +216,18 @@ d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
   display(data);
 });
 
+function onclick_grouped_bar(d){
+  if(d3.selectAll(".selected_multi_groupedbar").data().length > 4) {
+    alert("Only 5 Companies can be compared at once. Please use reset button for another selection.")
+  } else {
+    d3.select(this).classed("selected_multi_groupedbar", !d3.select(this).classed("selected_multi_groupedbar"));
+    d3.selectAll(".bubble_org").style("stroke", "white");
+    d3.selectAll(".selected_multi_groupedbar")
+                .style('stroke', 'gray')
+                .style('stroke-width', "3px");
+    selected_data_keys = d3.selectAll(".selected_multi_groupedbar").data();
+    keys_list = selected_data_keys.map(function(d){return d.organization;});
+    // console.log("keys", keys_list)
+    grouped_bar_method(keys_list);
+  }
+}
