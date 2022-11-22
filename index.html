@@ -14,158 +14,19 @@
 <script src="https://unpkg.com/topojson@3"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.3/d3-tip.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+<script src="http://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
-
-<!-- Styling the page -->
-<style >
-  body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-h4{
-  text-align: center;
-}
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 1px;
-  text-align: center;
-  font-size: 13px;
-  color: white;
-}
-
-/* Styling the contianers we have created for rows and columns */
-div {
-  position: absolute;
-}
-#patent_map_view {
-  top: 0;
-  left: 0;
-}
-#trends_cpc_classes_and_types {
-  top: 50%;
-  left: 0;
-}
-#relation_between_cpc_classes {
-  top: 0;
-  left: 50%;
-  background: rgb(222, 203, 222);
-  width: 50%;
-  height: 50%;
-}
-#assigne_stock{
-  top:50%;
-  left:50%;
-  width: 50%;
-  height: 50%;
-  background:rgb(211, 186, 191);
-}
-#cpc_classes_network_graph {
-  top: 20%;
-  left: 10%;
-  height:100%;
-  width:50%;
-}
-#cpc_claases_radial_chart {
-  top :20%;
-  left: 50%;
-  height: 100%;
-  width: 50%;
-}
-#assigne_bubble {
-  top: 20%;
-  left: 10%;
-  height:100%;
-  width:50%;
-}
-#assignee_line {
-  top :20%;
-  left: 50%;
-  height: 100%;
-  width: 50%;
-}
-
-/* Create two columns/boxes floating next to each other */
- nav {
-  float: left;
-  width: 50%;
-  height: 750px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
- nav ul {
-  list-style-type: none;
-  padding: 0;
-} 
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-} 
-</style>
-
-<!-- Styling the map vie that is present in column 1 -->
-<style type="text/css">
-.legend {
-  position: absolute;
-  left: 20px;
-  top: 30px;
-}
-
-.axis text {
-  font: 10px sans-serif;
-}
-
-.axis line,
-.axis path {
-  fill: none;
-  stroke: rgb(0, 0, 0);
-  shape-rendering: crispEdges;
-}
-
-div.tooltip {
-  position: absolute;
-  text-align: center;
-  width: 300px;
-  height: 150px;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: white;
-  border: 1px;
-  border-radius: 8px;
-  pointer-events: none;
-  box-shadow: 1px;
-}
-</style>
-
-
+  
+<link rel="stylesheet" href="css/style.css">
+<script src="jquery.js"></script> 
 
 </head>
 <body>
   <!-- Containter with US patent map view with state wise data -->
   <div id="patent_map_view"> 
-    <h4>US States Patents Counts</h4>
+    <h4><b>US States Patents Counts</b></h4>
     <label for="dropdown">CPC Classes:</label>
     <select id="map_cpc_classes" onchange="generateMapStates()">
         <!-- Drop down to select among the most popular cpc classes -->
@@ -175,94 +36,99 @@ div.tooltip {
         <option value="H01">H01 - Basic Electric Elements</option> 
         <option value="G06">G06 - Computing; Calculating; Counting</option> 
     </select>
+    <div id="map" class="map"></div>
+
     <!-- On selecting Map gets generated -->
-    <div onchange = "generateMapStates()"></div>
+    
   </div>
 
   <!-- Container that shows the trends of various patents types and cpc classes in the selected state -->
   <div id="trends_cpc_classes_and_types">
-    <h4>Trends for CPC classes and Patent Types</h4>
+    <h4><b>Trends for CPC classes and Patent Types</b></h4>
     <form>
       <label>
           <p>Select:</p>
       </label>
       <!-- Radio button for choice between Cpc classes and Patent types -->
       <label class="radio-inline">
-          <input type="radio" name="optradio" value="specific">&nbsp;CPC Class
+          <input type="radio" name="optradio" id="cpc_classes" value="specific">&nbsp;CPC Class
       </label>
       <label class="radio-inline">
-          <input type="radio" name="optradio" value="specific2">&nbsp;Patent Types
+          <input type="radio" name="optradio" id="patent_types" value="specific2">&nbsp;Patent Types
       </label>
-      
-      <select id="dropdown">
+      <br>
+      <select id="states">
+        <!-- Dropdown to select popular cpc classes -->
+        <option value="">--Select State--</option>
+
+       </select>
+      <select id="dropdown" >
           <!-- Dropdown to select popular cpc classes -->
           <option value="">--Select CPC Class--</option>
-          <option value="A">A61</option>
-          <option value="B">H04</option>
-          <option value="C">H01</option>
-          <option value="D">G06</option>
+          <option value="A61">A61</option>
+          <option value="H04">H04</option>
+          <option value="H01">H01</option>
+          <option value="G06">G06</option>
       </select>
-      <select id="dropdown2" >
+      <select id="selectButton">
         <!-- Dropdown to selece various types of patents -->
           <option value="">--Select Patent Types--</option>
-          <option value="utility">Utility</option>
-          <option value="reissue">ReIssue</option>
-          <option value="plant">Plant</option>
-          <option value="design">Design</option>
-          <option value="statiutory">Statutory Invention Registration</option>
+
       </select>
     </form>
     <!-- Demonstartion video of the zoom-in line chart which will be implemented for the further release. -->
-    <video width="460" height="240" controls>
-      <source src="images/line_chart_onzoom.mp4" type="video/mp4">
-      <source src="movie.ogg" type="video/ogg">
-      Your browser does not support the video tag.
-    </video>
+  
+    <div id="line_chart" class="line_chart"></div>
+
+    
   </div>
 
   <!-- Container that shows the relationship between various cpc classes via a network graph and 
   on click of the selected nodes gives the in detailed view of the relational wrt to patent counts 
   in radial column plot. -->
   <div id="relation_between_cpc_classes">
-    <h4>Relationship between different CPC classes</h4><br><br>
-    
+    <h4><b>Relationship between different CPC classes</b></h4><br><br>
     <!-- Sample network graph and radial column plot -->
-    <div id="cpc_classes_network_graph">
-      <img src="images/network-graph.png" alt="network_graph" style="width: 300px;height:300px;">
+    <div id="cpc_classes_network_graph" class="cpc_classes_network_graph" onchange="cpc_classes_network()">
     </div>
-    <div id="cpc_claases_radial_chart">
-      <img src="images/radial-chart.png" alt="radical_chart" style="width: 300px;height:300px;">
+
+  </div>
+
+  <div id="heat_map" class="heat_map">
+    <div id = "dataviz_heatmap" ></div>
+  </div>
+
+  <div id="assigne_stock">
+    <h4><b>Published patents by Top 20 Companies</b></h4>
+    <div id="viz1">
+     
+      <form>
+      <label for="dropdown5">Year Period:</label>
+      <select id="years" onChange="update()">
+        <option value="2018-2022">2018-2022</option>
+        <option value="2013-2017">2013-2017</option>
+        <option value="2008-2012">2008-2012</option>
+        <option value="2003-2007">2003-2007</option>
+        <option value="1998-2002">1998-2002</option>
+        <option value="1993-1997">1993-1997</option>
+        <option value="1988-1992">1988-1992</option>
+        <option value="1985-1987">1985-1987</option>
+      </select>
+    </form>
+    <button onclick="call_reset_bubbles()">Reset</button>
+    <div id = "bubble_org" class="bubble_org"></div>
     </div>
   </div>
+  <div id = "assignee_bargrouped">
+    <h4><b>Comparision of 5 selected companies</b></h4>
+    <div class="tooltip_grouped_bar"></div>
+    <!-- <svg id = 'group_bar' class = "group_bar" width="600" height="350"></svg> -->
+  </div>
+
 
   <!--  Container that visualizes the Impact on assigness based on the published patents wrt Stock Price.
   -->
-  <div id="assigne_stock">
-    <h4>Impact on assigness based on the published patents wrt Stock Price</h4>
 
-    <!-- Dropdown to select the period of years -->
-    <label for="dropdown">Year Period:</label>
-    <select id="Years" name="Years">
-        <option value="">--Select a Year--</option>
-        <option value="A">1985-1990</option>
-        <option value="B">1990-1995</option>
-        <option value="C">1995-2000</option>
-        <option value="D">2000-2005</option>
-        <option value="E">2005-2010</option>
-        <option value="F">2010-2015</option>
-        <option value="G">2015-2020</option>
-        <option value="H">2020-2025</option>
-    </select>
-    <!-- Displays the top orgs in the selected year period in bubble chart -->
-    <div id="assigne_bubble">
-      <img src="images/bubble.png" alt="bubble" style="width: 300px;height:300px;">
-    </div>
-
-    <!-- Displays the trends of patents counts wrt to stock price using line on bar chart -->
-    <div id="assignee_line">
-      <img src="images/Line-bar.png" alt="line" style="width: 300px;height:300px;">
-    </div>
-  </div>
 
 
 <script>
@@ -270,20 +136,20 @@ div.tooltip {
   $(document).ready(function(){
       // hidden at init
       $('#dropdown').hide();
-      $('#dropdown2').hide();
+      $('#selectButton').hide();
       $('input[type="radio"]').click(function(){
       // test the value of radio button to decide to show or hide the dropdown
           if ($(this).val() == 'specific') {
               $('#dropdown').show();
-              $('#dropdown2').hide();
+              $('#selectButton').hide();
           }
           else if ($(this).val()=='specific2') {
-              $('#dropdown2').show();
+              $('#selectButton').show();
               $('#dropdown').hide();
           }
           else{
               $('#dropdown').hide();
-              $('#dropdown2').hide();
+              $('#selectButton').hide();
           };
       });
   });
@@ -291,7 +157,10 @@ div.tooltip {
 
 
 <script src="javascript/generate_map.js"></script>
-
+<script src="javascript/cpc_classes_network.js"></script>
+<script src="javascript/line_chart.js"></script>
+<script src="javascript/bubble.js"></script>
+<script src="javascript/heat_map.js"></script>
 
 </body>
 </html>
