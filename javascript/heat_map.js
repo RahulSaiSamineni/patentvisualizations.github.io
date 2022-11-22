@@ -116,6 +116,41 @@ function generate_onlick_heatMap(nodeclicked_d){
                 .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
     }
 
+    var tooltip = d3.select("#dataviz_heatmap")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip_heatmap")
+        .style("background-color", "black")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(d) {
+        tooltip
+            .style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "black")
+            .style("stroke-width", 2)
+            .style("opacity", 1)
+    }
+    var mousemove = function(d) {
+        tooltip
+        .html(cpc_class_selected + " <--> " + d.paried_node + " : " + d.patent_counts)
+        .style('color', 'white')
+        .style('position', 'absolute')
+        .style("left", (d3.mouse(this)[0]+70) + "px")
+        .style("top", (d3.mouse(this)[1]) + "px")
+    }
+    var mouseleave = function(d) {
+        tooltip
+        .style("opacity", 0)
+        d3.select(this)
+        .style("stroke", "none")
+        .style("opacity", 0.8)
+    }
+
     
     })
 }
