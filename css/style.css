@@ -12,60 +12,71 @@ header {
   font-size: 13px;
   color: white;
 }
-
+.tooltip_grouped_bar {
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+  background: #515A5A;
+  border: 0 none;
+  border-radius: 4px;
+  color: #ffffff;
+  font: 12px sans-serif;
+  padding: 5px;
+  text-align: center;
+}
+/* Styling the contianers we have created for rows and columns */
 div {
   position: absolute;
-
 }
-#one {
+#patent_map_view {
   top: 0;
   left: 0;
 }
-#two {
+#trends_cpc_classes_and_types {
   top: 50%;
   left: 0;
-  /*background: rgb(217, 217, 200);*/
 }
-#three {
+#relation_between_cpc_classes {
   top: 0;
-  left: 50%;
-  background: rgb(222, 203, 222);
-  width: 50%;
-  height: 50%;
+  left: 35%;
 }
-#four{
+#heat_map{
+  top: -10px;;
+  left:65%;
+}
+#assigne_stock{
   top:50%;
-  left:50%;
-  width: 50%;
-  height: 50%;
-  background:rgb(211, 186, 191);
+  left:35%;
+  /* width: 50%;
+  height: 50%; */
 }
-#five {
+/* #cpc_classes_network_graph {
+  top: 20%;
+  left: 10%;
+  height:100%;
+  width:50%;
+} */
+
+#assignee_bargrouped {
+  top: 50%;
+  left:60%;
+}
+
+#assigne_bubble {
   top: 20%;
   left: 10%;
   height:100%;
   width:50%;
 }
-#six {
-  top :20%;
-  left: 50%;
-  height: 100%;
-  width: 50%;
-}
-#seven {
-  top: 20%;
-  left: 10%;
-  height:100%;
-  width:50%;
-}
-#eight {
+#assignee_line {
   top :20%;
   left: 50%;
   height: 100%;
   width: 50%;
 }
 
-/* Create two columns/boxes that floats next to each other */
+/* Create two columns/boxes floating next to each other */
  nav {
   float: left;
   width: 50%;
@@ -95,7 +106,36 @@ section::after {
   clear: both;
 }
 
+.legend {
+  position: absolute;
+  left: 20px;
+  top: 30px;
+}
 
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: rgb(0, 0, 0);
+  shape-rendering: crispEdges;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 300px;
+  height: 150px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: white;
+  border: 1px;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow: 1px;
+}
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
