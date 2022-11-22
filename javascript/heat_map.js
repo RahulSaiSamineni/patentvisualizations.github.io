@@ -38,6 +38,83 @@ function generate_onlick_heatMap(nodeclicked_d){
         }
     }
 
+    var myGroups = d3.map(data_selected, function(d){return d.year;}).keys()
+    myGroups.sort()
+    var myVars = d3.map(data_selected, function(d){return d.paried_node;}).keys()
+    // myVars.sort()
+
+    // Build X scales and axis:
+    var xScale_Heatmap = d3.scaleBand()
+        .range([ 0, width_heatmap ])
+        .domain(myGroups)
+        .padding(0.05);
+    
+        svg_heatMap.append("g")
+        .style("font-size", 12)
+        .style("font-weight", 'bold')
+        .attr("transform", "translate(0," + height_heatmap + ")")
+        .call(d3.axisBottom(xScale_Heatmap).tickSize(0))
+        .select(".domain").remove()
+    
+    // Build Y scales and axis:
+    var yScale_Heatmap = d3.scaleBand()
+        .range([ height_heatmap, 0 ])
+        .domain(myVars)
+        .padding(0.05);
+
+    svg_heatMap.append("g")
+        .style("font-size", 9)
+        .style("font-weight", 'bold')
+        .call(d3.axisLeft(yScale_Heatmap).tickSize(0))
+        .select(".domain").remove()
+
+    
+    function split(array, n) {
+        let [...arr]  = array;
+        var res = [];
+        while (arr.length) {
+        res.push(arr.splice(0, n));
+        }
+        return res;
+    }
+
+    // Build color scale
+    color_range_values = data_selected.map(function(d){return parseInt(d.patent_counts);});
+    split_color_range_values = split(color_range_values, color_range_values.length / 9);
+    console.log("split_color_range_values:", split_color_range_values)
+    // var myColor = d3.scaleLinear()
+    //     .domain([0, d3.max(color_range)])
+    //     .range(['white', 'red'])
+    var myColor = null;
+    if(split_color_range_values.lenght > 9){
+        myColor = d3.scaleOrdinal()
+                .domain([
+                    Math.max.apply(Math, split_color_range_values[9]),
+                    Math.max.apply(Math, split_color_range_values[7]),
+                    Math.max.apply(Math, split_color_range_values[6]),
+                    Math.max.apply(Math, split_color_range_values[5]),
+                    Math.max.apply(Math, split_color_range_values[4]),
+                    Math.max.apply(Math, split_color_range_values[3]),
+                    Math.max.apply(Math, split_color_range_values[2]),
+                    Math.max.apply(Math, split_color_range_values[1]),
+                    Math.max.apply(Math, split_color_range_values[0]),
+                ])
+                .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
+    } else {
+        myColor = d3.scaleOrdinal()
+                .domain([
+                    Math.max.apply(Math, split_color_range_values[8]),
+                    Math.max.apply(Math, split_color_range_values[7]),
+                    Math.max.apply(Math, split_color_range_values[6]),
+                    Math.max.apply(Math, split_color_range_values[5]),
+                    Math.max.apply(Math, split_color_range_values[4]),
+                    Math.max.apply(Math, split_color_range_values[3]),
+                    Math.max.apply(Math, split_color_range_values[2]),
+                    Math.max.apply(Math, split_color_range_values[1]),
+                    Math.max.apply(Math, split_color_range_values[0]),
+                ])
+                .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
+    }
 
     
     })
