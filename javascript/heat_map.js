@@ -38,6 +38,8 @@ function generate_onlick_heatMap(nodeclicked_d){
         }
     }
 
+
+    // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
     var myGroups = d3.map(data_selected, function(d){return d.year;}).keys()
     myGroups.sort()
     var myVars = d3.map(data_selected, function(d){return d.paried_node;}).keys()
@@ -115,7 +117,11 @@ function generate_onlick_heatMap(nodeclicked_d){
                 ])
                 .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
     }
+    // d3.scaleSequential()
+    //     .interpolator(d3.interpolateYlOrRd)
+    //     .domain([0, 700])
 
+    // create a tooltip
     var tooltip = d3.select("#dataviz_heatmap")
         .append("div")
         .style("opacity", 0)
@@ -151,7 +157,33 @@ function generate_onlick_heatMap(nodeclicked_d){
         .style("opacity", 0.8)
     }
 
-    
+    // add the squares
+    svg_heatMap.selectAll()
+        .data(data_selected, function(d) {return d.year+':'+d.paried_node;})
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return xScale_Heatmap(d.year) })
+        .attr("y", function(d) { return yScale_Heatmap(d.paried_node) })
+        .attr("rx", 4)
+        .attr("ry", 4)
+        .attr("width", xScale_Heatmap.bandwidth() )
+        .attr("height", yScale_Heatmap.bandwidth() )
+        .style("fill", function(d) { return myColor(d.patent_counts)} )
+        .style("stroke-width", 1)
+        //   .style("stroke", "black")
+        .style("opacity", 0.5)
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+
+        svg_heatMap.append("text")
+        .attr("x", 0)
+        .attr("y", -50)
+        .attr("text-anchor", "left")
+        .style("font-size", "18px")
+        .style("font-weight","700")
+        .text(cpc_class_selected + " Pairs HeatMap");
     })
+
 }
 
