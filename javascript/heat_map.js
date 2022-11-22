@@ -185,5 +185,23 @@ function generate_onlick_heatMap(nodeclicked_d){
         .text(cpc_class_selected + " Pairs HeatMap");
     })
 
+    // Add title to graph
+    // svg.append("text")
+    //         .attr("x", 0)
+    //         .attr("y", -50)
+    //         .attr("text-anchor", "left")
+    //         .style("font-size", "22px")
+    //         .text(cpc_class_selected + " Pairs heatmap");
+
+    // Add subtitle to graph
+    // svg.append("text")
+    //         .attr("x", 0)
+    //         .attr("y", -20)
+    //         .attr("text-anchor", "left")
+    //         .style("font-size", "14px")
+    //         .style("fill", "grey")
+    //         .style("max-width", 400)
+    //         .text("A short description of the take-away message of this chart.");
+
 }
 

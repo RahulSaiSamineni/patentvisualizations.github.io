@@ -1,31 +1,29 @@
-
-var width = 550;
-var height = 650;
-var class1 = '#ef8a62' //H01
-var class2 = '#e5f5e0' //A61
-var class3 = '#a1d99b' //H04
-var class4 = '#31a354' //G06
+function generateMapStates() {
+    var width = 550;
+    var height = 520;
+    var class1 = '#ef8a62' //H01
+    var class2 = '#e5f5e0' //A61
+    var class3 = '#a1d99b' //H04
+    var class4 = '#31a354' //G06
 var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2]) 
     .scale([700]); 
 var toggle = 0
-
-function generateMapStates() {
     toggle = 0
     var path = d3.geoPath()
         .projection(projection); 
     // Patents data that is being to plot on the graph
     states_data = "data/map1_data.csv"
-    d3.selectAll("svg").remove()
+    d3.selectAll("svg.map").remove()
     
-    var svg = d3.select("body")
+    var svg = d3.select("#map")
         .append("svg")
+        .attr("class", "map")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
 
     var viewByClasses = document.getElementById('map_cpc_classes');
     var valueAge = viewByClasses.options[viewByClasses.selectedIndex].value;
-    console.log('value_selection',valueAge);
     d3.csv(states_data, function(data) {
         var dataArray = [];
         var maxVal = 0
@@ -100,11 +98,15 @@ function generateMapStates() {
                     +"<div id='tipDiv'></div><br>"
                 });
             svg.call(tip);
-            var ramp = d3.scaleSequential(d3.interpolateYlOrRd).domain([minVal, maxVal/4])
+            var ramp = d3.scaleSequential(d3.interpolateOrRd).domain([minVal, maxVal/4])
+
             var div = d3.select("body").append("div")
                 .attr("class", "tooltip")
-                .style("opacity", 0.9)
+                .style("opacity", 0)
             svg.selectAll("path")
+
+
+
             .data(json.features)
                 .enter()
                 .append("path")
@@ -114,7 +116,6 @@ function generateMapStates() {
                 .style("stroke-width", "1")
                 .style("fill", function(d) {
                     return ramp(d.properties.value === undefined ? 0 : d.properties.value)
-                    
                 })
             .on("mouseover", function(d) {
                 d3.selectAll("#tipDiv").remove()
@@ -155,7 +156,6 @@ function generateMapStates() {
                 bar.append("rect")
                     .attr("width", 50)
                     .transition()
-                    .style("opacity", .9)
                     .duration(1000)
                     .attr("width", x)
                     .attr("height", barHeight - 1)
@@ -201,8 +201,43 @@ function generateMapStates() {
                     .duration(500)
                     .style("opacity", 0);
             });
+            axisScale = d3.scaleLinear()
+                .domain(ramp.domain())
+                .range([margin.left, width - margin.right])
+            
+            axisBottom = g => g
+                .attr("class", `x-axis`)
+                .attr("transform", `translate(-10,340)`)
+                .call(d3.axisBottom(axisScale)
+                    .ticks(width / 80)
+                    .tickSize(10)
+                    .tickSizeOuter(0))
+            
+            const linearGradient = svg.append("linearGradient")
+                .attr("id", "linear-gradient");    
+
+            linearGradient.selectAll("stop")
+                .data(ramp.ticks().map((t, i, n) => ({ offset: `${100*i/n.length}%`, color: ramp(t) })))
+                .enter().append("stop")
+                .attr("offset", d => d.offset)
+                .attr("stop-color", d => d.color);
+
+            svg.append('g')
+                .attr("transform", `translate(-10,330)`)
+                .append("rect")
+                .attr('transform', `translate(${margin.left}, 0)`)
+                .attr("width", width - margin.right - margin.left)
+                .attr("height", 10)
+                .style("fill", "url(#linear-gradient)");
+            
+            svg.append('g')
+                .call(axisBottom);
         });
     });
+
+
+
+    
 }
 
 
