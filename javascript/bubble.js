@@ -191,3 +191,18 @@ function bubbleChart(class_name, data) {
 function display(data) {
   bubbleChart('.bubble_org', data);
 }
+
+function update() {
+  var select = document.getElementById('years');
+  var option = select.options[select.selectedIndex];
+  let x = option.value;
+  let file_name = 'data/companies_bubble/companies_' + x + '.csv';
+  d3.csv(file_name, function(error, data){
+    display(data);
+  });
+}
+
+d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
+  display(data);
+});
+
