@@ -9,6 +9,7 @@ function cpc_classes_network(){
             cpc_class_name[cpc_classes_data[i].cpc_class] = cpc_classes_data[i].cpc_class_name;
         }
     });
+// }
     
 function createNetwork(edgelist) {
   var nodeHash = {};
@@ -127,7 +128,7 @@ function createForceNetwork(nodes, edges) {
         .style("border-radius", "5px")
         .style("padding", "5px")
         .style("color", "white")
-
+        
     // simulation.restart();
 
     function nodeMove(d){
@@ -200,4 +201,45 @@ function createForceNetwork(nodes, edges) {
         .style("stroke", "#8856a7")
         .style("stroke-width", "2px");
     }
+
+
+    // var new 
+    function dragstarted(d) {
+        // d3.select(this).raise().classed("active", true);
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        d.x = d3.event.x, d.y = d3.event.y;
+    }
+    
+    function dragged(d) {
+        d.x = d3.event.x;
+        d.y = d3.event.y;
+    }
+    
+    function dragended(d) {
+        // if (!d3.event.active) simulation.alphaTarget(0);
+        // d.x = null, d.y = null;
+    }
+
+    function updateNetwork() {
+        svg.selectAll("line")
+        .attr("x1", function (d) {return d.source.x})
+        .attr("y1", function (d) {return d.source.y})
+        .attr("x2", function (d) {return d.target.x})
+        .attr("y2", function (d) {return d.target.y});
+
+        svg.selectAll("g.node")
+        .attr("transform", function (d) {return "translate(" + d.x + "," + d.y + ")"});
+
+        svg.selectAll("g.node")
+        .attr("r", function (d) {return d.weight})
+        // .style("fill", "#CC9999")
+        //     .style("stroke", "red")
+        //     .style("stroke-width", "1px");
+
+    }
+
 }
+}
+
+
+cpc_classes_network()
