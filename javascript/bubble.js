@@ -32,6 +32,16 @@ function bubbleChart(class_name, data) {
   
     // force simulation starts up automatically, which we don't want as there aren't any nodes yet
     simulation.stop();
+    
+  function call_reset_bubbles(){
+  d3.select('#assignee_bargrouped').select("svg").remove();
+  var e = document.getElementById("years");
+  var value = e.value;
+  let file_name = 'data/companies_bubble/companies_' + value + '.csv';
+  d3.csv(file_name, function(error, data){
+    display(data);
+  });
+}
   
     // set up colour scale
     const fillColour = d3.scaleOrdinal()
