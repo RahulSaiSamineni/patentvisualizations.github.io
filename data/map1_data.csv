@@ -1,0 +1,209 @@
+state,cpc_class,patent_counts
+Alabama,A61,34621
+Alaska,A61,2825
+Arizona,A61,110420
+Arkansas,A61,9516
+California,A61,3268557
+Colorado,A61,221647
+Connecticut,A61,331525
+Delaware,A61,37309
+Dist. of Columbia,A61,13839
+Florida,A61,334110
+Georgia,A61,124718
+Hawaii,A61,8755
+Idaho,A61,6864
+Illinois,A61,287640
+Indiana,A61,277442
+Iowa,A61,23816
+Kansas,A61,32429
+Kentucky,A61,38370
+Louisiana,A61,15989
+Maine,A61,19981
+Maryland,A61,242224
+Massachusetts,A61,1164105
+Michigan,A61,173039
+Minnesota,A61,558425
+Mississippi,A61,16213
+Missouri,A61,109702
+Montana,A61,7414
+Nebraska,A61,16019
+Nevada,A61,19212
+New Hampshire,A61,102839
+New Jersey,A61,668568
+New Mexico,A61,16239
+New York,A61,434663
+North Carolina,A61,222965
+North Dakota,A61,2447
+Ohio,A61,606102
+Oklahoma,A61,13597
+Oregon,A61,66990
+Pennsylvania,A61,615370
+Puerto Rico,A61,1782
+Rhode Island,A61,37387
+South Carolina,A61,32487
+South Dakota,A61,4798
+Tennessee,A61,144905
+Texas,A61,301254
+Utah,A61,142565
+Vermont,A61,8872
+Virginia,A61,90613
+Washington,A61,290240
+West Virginia,A61,5270
+Wisconsin,A61,158194
+Wyoming,A61,3626
+Alabama,G06,9150
+Alaska,G06,451
+Arizona,G06,134453
+Arkansas,G06,13492
+California,G06,2595179
+Colorado,G06,146857
+Connecticut,G06,70953
+Delaware,G06,8620
+Dist. of Columbia,G06,13657
+Florida,G06,117664
+Georgia,G06,93145
+Hawaii,G06,3109
+Idaho,G06,30373
+Illinois,G06,217763
+Indiana,G06,18616
+Iowa,G06,26416
+Kansas,G06,19606
+Kentucky,G06,10294
+Louisiana,G06,3787
+Maine,G06,4649
+Maryland,G06,65090
+Massachusetts,G06,342042
+Michigan,G06,68967
+Minnesota,G06,134364
+Mississippi,G06,1832
+Missouri,G06,30885
+Montana,G06,2540
+Nebraska,G06,8189
+Nevada,G06,16530
+New Hampshire,G06,33951
+New Jersey,G06,215071
+New Mexico,G06,12419
+New York,G06,496484
+North Carolina,G06,178968
+North Dakota,G06,1688
+Ohio,G06,76436
+Oklahoma,G06,4702
+Oregon,G06,192602
+Pennsylvania,G06,110425
+Puerto Rico,G06,853
+Rhode Island,G06,7402
+South Carolina,G06,10370
+South Dakota,G06,1616
+Tennessee,G06,18127
+Texas,G06,520729
+Utah,G06,50692
+Vermont,G06,15151
+Virginia,G06,105422
+Washington,G06,701612
+West Virginia,G06,1456
+Wisconsin,G06,44344
+Wyoming,G06,1021
+Alabama,H01,9221
+Alaska,H01,197
+Arizona,H01,333097
+Arkansas,H01,4875
+California,H01,1914801
+Colorado,H01,60448
+Connecticut,H01,93724
+Delaware,H01,12627
+Dist. of Columbia,H01,2631
+Florida,H01,84416
+Georgia,H01,30165
+Hawaii,H01,1658
+Idaho,H01,306912
+Illinois,H01,111382
+Indiana,H01,36697
+Iowa,H01,13417
+Kansas,H01,4821
+Kentucky,H01,6794
+Louisiana,H01,2454
+Maine,H01,10792
+Maryland,H01,53051
+Massachusetts,H01,232444
+Michigan,H01,130214
+Minnesota,H01,93305
+Mississippi,H01,1619
+Missouri,H01,16680
+Montana,H01,5558
+Nebraska,H01,4917
+Nevada,H01,7913
+New Hampshire,H01,40721
+New Jersey,H01,139385
+New Mexico,H01,36159
+New York,H01,949371
+North Carolina,H01,117966
+North Dakota,H01,1357
+Ohio,H01,73912
+Oklahoma,H01,4553
+Oregon,H01,246599
+Pennsylvania,H01,163571
+Puerto Rico,H01,450
+Rhode Island,H01,9385
+South Carolina,H01,24203
+South Dakota,H01,1855
+Tennessee,H01,13414
+Texas,H01,334758
+Utah,H01,21073
+Vermont,H01,130454
+Virginia,H01,35550
+Washington,H01,108453
+West Virginia,H01,1727
+Wisconsin,H01,55361
+Wyoming,H01,747
+Alabama,H04,13981
+Alaska,H04,750
+Arizona,H04,67900
+Arkansas,H04,6722
+California,H04,3109798
+Colorado,H04,200014
+Connecticut,H04,46429
+Delaware,H04,5380
+Dist. of Columbia,H04,11467
+Florida,H04,161848
+Georgia,H04,205048
+Hawaii,H04,4179
+Idaho,H04,14296
+Illinois,H04,267010
+Indiana,H04,37579
+Iowa,H04,34169
+Kansas,H04,59161
+Kentucky,H04,11363
+Louisiana,H04,4871
+Maine,H04,9525
+Maryland,H04,119339
+Massachusetts,H04,328647
+Michigan,H04,64725
+Minnesota,H04,104210
+Mississippi,H04,2463
+Missouri,H04,34143
+Montana,H04,2839
+Nebraska,H04,9881
+Nevada,H04,14435
+New Hampshire,H04,51527
+New Jersey,H04,432792
+New Mexico,H04,9109
+New York,H04,362982
+North Carolina,H04,161638
+North Dakota,H04,653
+Ohio,H04,48586
+Oklahoma,H04,15786
+Oregon,H04,173020
+Pennsylvania,H04,115480
+Puerto Rico,H04,664
+Rhode Island,H04,4809
+South Carolina,H04,6494
+South Dakota,H04,1560
+Tennessee,H04,14357
+Texas,H04,498228
+Utah,H04,47517
+Vermont,H04,4588
+Virginia,H04,178074
+Washington,H04,530006
+West Virginia,H04,2067
+Wisconsin,H04,26195
+Wyoming,H04,4499
