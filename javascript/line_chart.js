@@ -41,10 +41,6 @@ d3.csv("data/trend.csv", function(data) {
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; })
 
-    // document.getElementById("states").value = allState[0]
-
-    // document.getElementById("selectButton").value = allGroup[0]
-
     // A color scale: one color for each group
     var myColor = d3.scaleOrdinal()
       .domain(allGroup)
@@ -99,8 +95,7 @@ d3.csv("data/trend.csv", function(data) {
     
         dataResultset.push(tempObj);
       }
-
-      console.log("dataResultset", dataResultset)
+      
       if(dataResultset.length <= 1) {
         alert("No data for " + selectedStateOption + " in " + selectedGroup);
       }
