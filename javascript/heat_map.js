@@ -43,7 +43,6 @@ function generate_onlick_heatMap(nodeclicked_d){
     var myGroups = d3.map(data_selected, function(d){return d.year;}).keys()
     myGroups.sort()
     var myVars = d3.map(data_selected, function(d){return d.paried_node;}).keys()
-    // myVars.sort()
 
     // Build X scales and axis:
     var xScale_Heatmap = d3.scaleBand()
@@ -83,10 +82,6 @@ function generate_onlick_heatMap(nodeclicked_d){
     // Build color scale
     color_range_values = data_selected.map(function(d){return parseInt(d.patent_counts);});
     split_color_range_values = split(color_range_values, color_range_values.length / 9);
-    console.log("split_color_range_values:", split_color_range_values)
-    // var myColor = d3.scaleLinear()
-    //     .domain([0, d3.max(color_range)])
-    //     .range(['white', 'red'])
     var myColor = null;
     if(split_color_range_values.lenght > 9){
         myColor = d3.scaleOrdinal()
@@ -117,9 +112,6 @@ function generate_onlick_heatMap(nodeclicked_d){
                 ])
                 .range(['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b']);
     }
-    // d3.scaleSequential()
-    //     .interpolator(d3.interpolateYlOrRd)
-    //     .domain([0, 700])
 
     // create a tooltip
     var tooltip = d3.select("#dataviz_heatmap")
@@ -170,7 +162,6 @@ function generate_onlick_heatMap(nodeclicked_d){
         .attr("height", yScale_Heatmap.bandwidth() )
         .style("fill", function(d) { return myColor(d.patent_counts)} )
         .style("stroke-width", 1)
-        //   .style("stroke", "black")
         .style("opacity", 0.5)
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
@@ -185,23 +176,5 @@ function generate_onlick_heatMap(nodeclicked_d){
         .style("font-weight","700")
         .text(cpc_class_selected + " Pairs HeatMap");
     })
-
-    // Add title to graph
-    // svg.append("text")
-    //         .attr("x", 0)
-    //         .attr("y", -50)
-    //         .attr("text-anchor", "left")
-    //         .style("font-size", "22px")
-    //         .text(cpc_class_selected + " Pairs heatmap");
-
-    // Add subtitle to graph
-    // svg.append("text")
-    //         .attr("x", 0)
-    //         .attr("y", -20)
-    //         .attr("text-anchor", "left")
-    //         .style("font-size", "14px")
-    //         .style("fill", "grey")
-    //         .style("max-width", 400)
-    //         .text("A short description of the take-away message of this chart.");
 
 }
