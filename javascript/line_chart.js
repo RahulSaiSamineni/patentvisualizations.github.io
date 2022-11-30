@@ -19,7 +19,6 @@ d3.csv("data/trend.csv", function(data) {
 
     // List of groups (here I have one group per column)
     var allGroup = ['design', 'plant', 'reissue', 'statutory invention registration', 'utility']
-    // d3.map(data, function(d){return(d.name)}).keys()
 
     var allState = d3.map(data, function(d){return(d.state)}).keys()
 
@@ -95,7 +94,8 @@ d3.csv("data/trend.csv", function(data) {
     
         dataResultset.push(tempObj);
       }
-      
+
+      console.log("dataResultset", dataResultset)
       if(dataResultset.length <= 1) {
         alert("No data for " + selectedStateOption + " in " + selectedGroup);
       }
@@ -125,7 +125,7 @@ d3.csv("data/trend.csv", function(data) {
                       .y(function(d) { return y(d.count) })
                     )
                     .attr("stroke", function(d){ return myColor(selectedGroup) })
-                    .style("stroke-width", 4)
+                    .style("stroke-width", 3)
                     .style("fill", "none");
     }
 
@@ -163,6 +163,11 @@ d3.csv("data/trend.csv", function(data) {
       update(selectedOption, selectedStateOption)
     }
   })
-   
 
+  update('A61', 'California')
+  document.getElementById("states").value = 'California';
+  document.getElementById("states").selected = true;
 })
+
+
+
