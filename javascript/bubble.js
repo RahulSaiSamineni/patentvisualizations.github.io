@@ -418,7 +418,7 @@ function grouped_bar_method(keys, value_year){
     });
 }
 
-d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(data){
+d3.csv('data/companies_bubble/companies_2018-2022.csv', function(data){
   display(data);
 });
 
