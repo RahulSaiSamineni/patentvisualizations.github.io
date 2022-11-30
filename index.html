@@ -27,7 +27,7 @@
 <body>
   <!-- Containter with US patent map view with state wise data -->
   <div id="patent_map_view"> 
-    <h4>&nbsp;&nbsp;&nbsp;<button class="popup-trigger"><i class= "fa fa-info"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <h4>
       <b>US States Patents Counts</b></h4>
 
     
@@ -38,13 +38,19 @@
                 <button class="popup__close" type="button" ></button>
                 <div class="popup__text">
                   <h2>The US Patent Visualization contains total of 3 sub sections:</h2>
-                  <ul style="list-style-type:square;">
-                    <li><h3>Popular Patent Classes and Patent Types Trend over Years (Left):</h3></li>
-                    <p>Hover over each State to see the Top Patent counts. Next, choose the dropdowns below to check the trend over years for specified Pantent Type or CPC Class in the selected state.</p>
-                    <li><h3>Relationship between Top Classes and its Trend over Years (Right Top)</h3></li>
-                    <p>The Network graph shows the relation bwtween Top CPC Classes. Hover over to see the related CPC Classes and the area of Patent. Click to see the trend over years bwtween the selected and other CPC Classes.</p>
-                    <li><h3>Top Companies Patent Trend over Years (Right Bottom)</h3></li>
-                    <p>Select the Year from dropdown which shows the Top 20 compaines. Hover over to see the company and Click to see the trend over years. Can select upto 5 companies to compare the trend in Patents. And use reset button to select different set of companies for comparision.</p>
+                  <ul class="popup_list">
+                    <li><h3>Popular Patent Classes and Patent Types trend over the years (Left)</h3></li>
+                    <p>Hover on each state to see the count of patent wrt to popular CPC classes.<br>
+                      Next, choose the dropdowns below to check the trend over years for specified patent type or CPC Class in the selected state.</p>
+                    <li><h3>Relationship between top Patent Classes and its trends over the years (Right Top)</h3></li>
+                    <p>The Network graph shows the relation between the top CPC Classes. <br>
+                      Hover on the nodes to see the type CPC Classes and the area of the patent. <br>
+                      Click on the nodes to see the trend over the years between the selected CPC class and the other CPC Classes.</p>
+                    <li><h3>Patent trends of Top Companies and their trend over the years (Right Bottom)</h3></li>
+                    <p>Select the Year from dropdown which shows the Top 20 compaines in the respective year group.<br>
+                       Hover over the bubble to see the company info and count of the patents.<br>
+                       Click on the bubble to see the trend over years. You can select upto 5 companies to compare the trends of the patent counts. <br>
+                       Use the reset button to select different set of companies for comparision.</p>
                   </ul>
                   <h2></h2>
                 </div>
@@ -78,7 +84,7 @@
       </label>
       <!-- Radio button for choice between Cpc classes and Patent types -->
       <label class="radio-inline">
-          <input type="radio" name="optradio" id="cpc_classes" value="specific">&nbsp;CPC Class
+          <input type="radio" name="optradio" id="cpc_classes" value="specific" checked>&nbsp;CPC Class
       </label>
       <label class="radio-inline">
           <input type="radio" name="optradio" id="patent_types" value="specific2">&nbsp;Patent Types
@@ -92,7 +98,7 @@
       <select id="dropdown" >
           <!-- Dropdown to select popular cpc classes -->
           <option value="Select">--Select CPC Class--</option>
-          <option value="A61">A61</option>
+          <option value="A61" selected>A61</option>
           <option value="H04">H04</option>
           <option value="H01">H01</option>
           <option value="G06">G06</option>
@@ -116,7 +122,10 @@
   <div class="vl"></div>
 
   <div id="relation_between_cpc_classes">
-    <h4><b>Relationship between different CPC classes</b></h4><br><br>
+    <h4><b>Relationship between different CPC classes</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="popup-trigger"><i class= "fa fa-info"></i></h4><br><br>
     <!-- Sample network graph and radial column plot -->
     <div id="cpc_classes_network_graph" class="cpc_classes_network_graph" onchange="cpc_classes_network()">
     </div>
@@ -136,7 +145,8 @@
       <form>
       <label for="dropdown5">Year Period:</label>
       <select id="years" onChange="update()">
-        <option value="2018-2022">2018-2022</option>
+        <option value="Select">-- Select Type --</option>
+        <option value="2018-2022" selected>2018-2022</option>
         <option value="2013-2017">2013-2017</option>
         <option value="2008-2012">2008-2012</option>
         <option value="2003-2007">2003-2007</option>
@@ -167,7 +177,7 @@
 
   $(document).ready(function(){
       // hidden at init
-      $('#dropdown').hide();
+      // $('#dropdown').hide();
       $('#selectButton').hide();
       $('input[type="radio"]').click(function(){
       // test the value of radio button to decide to show or hide the dropdown
