@@ -9,7 +9,6 @@ function cpc_classes_network(){
             cpc_class_name[cpc_classes_data[i].cpc_class] = cpc_classes_data[i].cpc_class_name;
         }
     });
-// }
     
 function createNetwork(edgelist) {
   var nodeHash = {};
@@ -34,41 +33,24 @@ function createNetwork(edgelist) {
 
 function createForceNetwork(nodes, edges) {
 
-    // var offsetHeight = document.getElementById('networkMap_id').offsetHeight
-    // console.log("offsetHeight:", offsetHeight)
-    // var offsetWidth = document.getElementById('networkMap_id').offsetWidth
-    // console.log("offsetWidth:", offsetWidth)
-
     var width = 400,
         height = 330;
     //create a network from an edgelist 
-    // .id(function(d) { return d.id; })
     var simulation = d3.forceSimulation(nodes)
                     .force("link", d3.forceLink().distance(70))
                     .force("charge", d3.forceManyBody())
-                    // .force('centerX', d3.forceX(width / 2))
-                    // .force('centerY', d3.forceY(height / 2));
                     .force("center", d3.forceCenter(width / 2, height / 2))
                     .force("collide", d3.forceCollide(14));
-                    // .force("collide", d3.forceCollide().radius(d => d.r + 1));
-                    // .restart();
-                    // .force("x", d3.forceX())
-                    // .force("y", d3.forceY());
 
     simulation.nodes(nodes)
               .on("tick", updateNetwork);
 
     simulation.force("link")
               .links(edges);
-    
-    // var svg = d3.select("svg");
     var svg = d3.select("#cpc_classes_network_graph")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height)
-
-
-    // svg.selectAll('g').remove();
 
     svg.append("g")
         .selectAll("line")
@@ -95,22 +77,10 @@ function createForceNetwork(nodes, edges) {
                                 .on("end", dragended));
 
     nodeEnter.append("circle")
-            // .attr("cx", 10)
-            // .attr("cy", 40)
             .attr("r", 14)
             .style("fill", "#deebf7")
             .style("stroke", "#3182bd")
             .style("stroke-width", "1px")
-    
-    // nodeEnter.append("text")
-    //         .style("text-anchor", "middle")
-    //         .attr("y", 2)
-    //         .style("stroke-width", "1px")
-    //         .style("stroke-opacity", 0.75)
-    //         .style("stroke", "white")
-    //         .style("font-size", "8px")
-    //         .text(function (d) {return d.id})
-    //         .style("pointer-events", "none")
 
     nodeEnter.append("text")
             .style("text-anchor", "middle")
@@ -128,8 +98,6 @@ function createForceNetwork(nodes, edges) {
         .style("border-radius", "5px")
         .style("padding", "5px")
         .style("color", "white")
-        
-    // simulation.restart();
 
     function nodeMove(d){
         tooltip_network
@@ -139,17 +107,13 @@ function createForceNetwork(nodes, edges) {
 
     function nodeClick(d) {
         generate_onlick_heatMap(d);
-        // d.fixed = true;
     }
 
     function nodeDoubleClick(d) {
         
-        // d.fixed = false;
     }
 
     function nodeOver(d) {
-        
-        // simulation.stop();
         tooltip_network
             .transition()
             .duration(200)
@@ -165,8 +129,6 @@ function createForceNetwork(nodes, edges) {
     function nodeOut() {
         simulation.restart();
         tooltip_network
-            // .transition()
-            // .duration(200)
             .style("opacity", 0)
         d3.selectAll("g.node > circle")
         .style("fill", "#deebf7")
@@ -205,7 +167,6 @@ function createForceNetwork(nodes, edges) {
 
     // var new 
     function dragstarted(d) {
-        // d3.select(this).raise().classed("active", true);
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
         d.x = d3.event.x, d.y = d3.event.y;
     }
@@ -216,8 +177,6 @@ function createForceNetwork(nodes, edges) {
     }
     
     function dragended(d) {
-        // if (!d3.event.active) simulation.alphaTarget(0);
-        // d.x = null, d.y = null;
     }
 
     function updateNetwork() {
@@ -232,14 +191,9 @@ function createForceNetwork(nodes, edges) {
 
         svg.selectAll("g.node")
         .attr("r", function (d) {return d.weight})
-        // .style("fill", "#CC9999")
-        //     .style("stroke", "red")
-        //     .style("stroke-width", "1px");
 
     }
 
 }
 }
-
-
 cpc_classes_network()
