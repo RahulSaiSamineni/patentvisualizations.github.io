@@ -25,7 +25,6 @@ function bubbleChart(class_name, data) {
     // create a force simulation and add forces to it
     const simulation = d3.forceSimulation(nodes_org)
       .force('charge', d3.forceManyBody().strength(charge))
-      // .force('center', d3.forceCenter(centre.x, centre.y))
       .force('x', d3.forceX().strength(forceStrength).x(centre.x))
       .force('y', d3.forceY().strength(forceStrength).y(centre.y))
       .force('collision', d3.forceCollide().radius(d => d.radius + 1))
@@ -106,8 +105,6 @@ function bubbleChart(class_name, data) {
     }
     var hideTooltip = function(d) {
       tooltip
-        // .transition()
-        // .duration(200)
         .style("opacity", 0)
     }
     // bind nodes data to circle elements
@@ -118,7 +115,6 @@ function bubbleChart(class_name, data) {
   
     bubbles = elements
       .append('circle')
-    //   .append('class', 'circle_org')
       .classed('bubble_org', true)
       .attr('r', d => d.radius)
       .attr('fill', d => fillColour(d.organization))
@@ -135,7 +131,6 @@ function bubbleChart(class_name, data) {
     
 
     function dragstarted(d) {
-        // d3.select(this).raise().classed("active", true);
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
         d.x = d3.event.x, d.y = d3.event.y;
     }
@@ -147,24 +142,13 @@ function bubbleChart(class_name, data) {
     
     function dragended(d) {
         if (!d3.event.active) simulation.alphaTarget(0);
-        // d.x = null, d.y = null;
     }
-      
-    // labels
-    // labels = elements
-    //   .append('text')
-    //   .attr('dy', '.3em')
-    //   .style('text-anchor', 'middle')
-    //   .style('font-size', 5)
-    //   .style("position", 'absolute')
-    //   .text(d => d.organization)
   
     // set simulation's nodes to our newly created nodes array
     // simulation starts running automatically once nodes are set
     simulation.nodes(nodes_org)
       .on('tick', ticked)
       .restart();
-    // }
     
     // callback function called after every tick of the force simulation
     // here we do the actual repositioning of the circles based on current x and y value of their bound node data
@@ -173,19 +157,10 @@ function bubbleChart(class_name, data) {
       bubbles
         .attr('cx', d => d.x)
         .attr('cy', d => d.y)
-  
-      // labels
-      //   .attr('x', d => d.x)
-      //   .attr('y', d => d.y)
     }
     
-  
-    // // return chart function from closure
-    // return chart;
   }
   
-  // new bubble chart instance
-  // let myBubbleChart = bubbleChart();
   
   // function called once promise is resolved and data is loaded from csv
   // calls bubble chart function to display inside #vis div
@@ -228,7 +203,6 @@ function onclick_grouped_bar(d){
                 .style('stroke-width', "3px");
     selected_data_keys = d3.selectAll(".selected_multi_groupedbar").data();
     keys_list = selected_data_keys.map(function(d){return d.organization;});
-    // console.log("keys", keys_list)
     var e = document.getElementById("years");
     var value_year = e.value;
     grouped_bar_method(keys_list, value_year);
@@ -236,18 +210,10 @@ function onclick_grouped_bar(d){
 }
 
 function grouped_bar_method(keys, value_year){
-
-    // var keys = ;
-    // console.log("logoing", d3.select('#assignee_bargrouped'))
     d3.select('#assignee_bargrouped').select("svg").remove();
 
     var tool_tip = d3.select('#assignee_bargrouped').append("div")
                     .attr("class", "grouped_bar_tooltip")
-
-    // selecting a svg and appending a group tag to it also setting up 
-    // margins, width and height for inner drawing space
-    
-        // svg_bar = d3.select("svg.group_bar"),
 
     var svg_bar =  d3.select("#assignee_bargrouped")
         .append("svg")
@@ -295,11 +261,8 @@ function grouped_bar_method(keys, value_year){
     }, function(error, data) {
         if (error) throw error;
         // creating var keys containing array of names of days
-        // var keys = data.columns.slice(1)
-        // console.log("keys", keys)
         // setting up domain for x0 as a list of all the names of months
         x0.domain(data.map(function(d) {
-            //console.log(d.Month);
             return d.year;
         }));
         // setting up domain for x1 as a list of all the names of days
@@ -318,7 +281,6 @@ function grouped_bar_method(keys, value_year){
             .enter()
             .append("g")
             .attr("transform", function(d) {
-                //console.log(x0(d.Month));
                 return "translate(" + x0(d.year) + ",0)";
             })
             .attr("class", "days")
@@ -326,7 +288,6 @@ function grouped_bar_method(keys, value_year){
             .selectAll("rect")
             .data(function(d) {
                 return keys.map(function(key) {
-                    //console.log({ key: key, value: d[key] });
                     return {
                         key: key,
                         value: d[key]
@@ -337,12 +298,10 @@ function grouped_bar_method(keys, value_year){
             .append("rect")
             .attr("class", "bar")
             .attr("x", function(d) {
-                //console.log(x1(d.key));
                 return x1(d.key);
             })
             .attr("width", x1.bandwidth())
             .attr("fill", function(d) {
-                //console.log(z(d.key));
                 return z(d.key);
             })
             // setting up y coordinates and height position to 0 for transition
@@ -462,4 +421,3 @@ function grouped_bar_method(keys, value_year){
 
     });
 }
-
