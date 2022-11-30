@@ -94,8 +94,7 @@ d3.csv("data/trend.csv", function(data) {
     
         dataResultset.push(tempObj);
       }
-
-      console.log("dataResultset", dataResultset)
+        
       if(dataResultset.length <= 1) {
         alert("No data for " + selectedStateOption + " in " + selectedGroup);
       }
