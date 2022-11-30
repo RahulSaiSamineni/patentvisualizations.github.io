@@ -178,9 +178,9 @@ function update() {
   });
 }
 
-d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
-  display(data);
-});
+// d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
+//   display(data);
+// });
 
 function call_reset_bubbles(){
   d3.select('#assignee_bargrouped').select("svg").remove();
