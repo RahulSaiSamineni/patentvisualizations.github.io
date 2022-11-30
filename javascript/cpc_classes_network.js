@@ -34,7 +34,7 @@ function createNetwork(edgelist) {
 function createForceNetwork(nodes, edges) {
 
     var width = 400,
-        height = 330;
+        height = 310;
     //create a network from an edgelist 
     var simulation = d3.forceSimulation(nodes)
                     .force("link", d3.forceLink().distance(70))
@@ -110,7 +110,6 @@ function createForceNetwork(nodes, edges) {
     }
 
     function nodeDoubleClick(d) {
-        
     }
 
     function nodeOver(d) {
@@ -196,4 +195,6 @@ function createForceNetwork(nodes, edges) {
 
 }
 }
+
+
 cpc_classes_network()
