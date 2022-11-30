@@ -12,4 +12,4 @@ CS 529 Visual Data Science Final Project for Patent Data Visualization
 + Languages : Python, D3.js, CSS, Javascript
 + IDE : Visual Studio Code
 
-+ **Github Link**: [PatentDataVisualization](https://rahulsaisamineni.github.io/patentvisualizations.github.io/)
+### **Github Link**: [PatentDataVisualization](https://rahulsaisamineni.github.io/patentvisualizations.github.io/)
