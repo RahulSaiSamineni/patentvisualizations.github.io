@@ -40,7 +40,7 @@ function createForceNetwork(nodes, edges) {
     // console.log("offsetWidth:", offsetWidth)
 
     var width = 400,
-        height = 350;
+        height = 330;
     //create a network from an edgelist 
     // .id(function(d) { return d.id; })
     var simulation = d3.forceSimulation(nodes)
@@ -76,7 +76,7 @@ function createForceNetwork(nodes, edges) {
         .enter()
         .append("line")
         .style("stroke-width", "1px")
-        .style("stroke", "#fc9272");
+        .style("stroke", "#3182bd");
         
     
     var nodeEnter = svg.selectAll("g.node")
@@ -98,8 +98,8 @@ function createForceNetwork(nodes, edges) {
             // .attr("cx", 10)
             // .attr("cy", 40)
             .attr("r", 14)
-            .style("fill", "#fee0d2")
-            .style("stroke", "#de2d26")
+            .style("fill", "#deebf7")
+            .style("stroke", "#3182bd")
             .style("stroke-width", "1px")
     
     // nodeEnter.append("text")
@@ -169,12 +169,12 @@ function createForceNetwork(nodes, edges) {
             // .duration(200)
             .style("opacity", 0)
         d3.selectAll("g.node > circle")
-        .style("fill", "#fee0d2")
-        .style("stroke", "#de2d26")
+        .style("fill", "#deebf7")
+        .style("stroke", "#3182bd")
         .style("stroke-width", "1px");
 
         d3.selectAll("line")
-        .style("stroke", "#fc9272")
+        .style("stroke", "#3182bd")
         .style("stroke-width", "1px");
     }
 
@@ -194,12 +194,12 @@ function createForceNetwork(nodes, edges) {
 
         d3.selectAll("line").filter(function (p) {return filteredEdges.indexOf(p) > -1})
         .style("stroke", "#9ebcda")
-        .style("stroke-width", "3px");
+        .style("stroke-width", "4px");
 
         d3.selectAll("circle").filter(function (p) {return egoIDs.indexOf(p.id) > -1})
-        .style("fill", "#e0ecf4")
+        .style("fill", "#bcbddc")
         .style("stroke", "#8856a7")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "px");
     }
 
 
