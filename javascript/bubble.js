@@ -37,7 +37,7 @@ function bubbleChart(class_name, data) {
     // set up colour scale
     const fillColour = d3.scaleOrdinal()
         .domain(["40","100", "175", "245", "315", "450","580","645","800","945","1100"])
-        .range(["#ffffcc","#fff0a9","#fee087","#fec965","#feab4b","#fd893c","#fa5c2e","#ec3023","#d31121","#af0225","#800026"]);
+        .range(["#0570b0","#3690c0",'#08306b','#08519c','#2171b5','#4292c6',"#6baed6","#9ecae1","#c6dbef","#a6bddb","#d0d1e6"]);
   
     // data manipulation function takes raw data from csv and converts it into an array of node objects
     // each node will store data and visualisation values to draw a bubble
@@ -224,22 +224,25 @@ function onclick_grouped_bar(d){
     d3.select(this).classed("selected_multi_groupedbar", !d3.select(this).classed("selected_multi_groupedbar"));
     d3.selectAll(".bubble_org").style("stroke", "white");
     d3.selectAll(".selected_multi_groupedbar")
-                .style('stroke', 'gray')
+                .style('stroke', 'black')
                 .style('stroke-width', "3px");
     selected_data_keys = d3.selectAll(".selected_multi_groupedbar").data();
     keys_list = selected_data_keys.map(function(d){return d.organization;});
     // console.log("keys", keys_list)
-    grouped_bar_method(keys_list);
+    var e = document.getElementById("years");
+    var value_year = e.value;
+    grouped_bar_method(keys_list, value_year);
   }
 }
 
-function grouped_bar_method(keys){
+function grouped_bar_method(keys, value_year){
 
     // var keys = ;
     // console.log("logoing", d3.select('#assignee_bargrouped'))
     d3.select('#assignee_bargrouped').select("svg").remove();
 
-    var divTooltip_grouped_bar = d3.select("div.tooltip_grouped_bar")
+    var tool_tip = d3.select('#assignee_bargrouped').append("div")
+                    .attr("class", "grouped_bar_tooltip")
 
     // selecting a svg and appending a group tag to it also setting up 
     // margins, width and height for inner drawing space
@@ -250,7 +253,7 @@ function grouped_bar_method(keys){
         .append("svg")
         .attr("class",'group_bar')
         .attr("width", 570)
-        .attr("height", 400);
+        .attr("height", 350);
 
     var margin_grouped_bar = {
       top: 20,
@@ -280,10 +283,11 @@ function grouped_bar_method(keys){
 
     // creating an ordinal scale for color that is going to represent different days of week
     var z = d3.scaleOrdinal()
-    .range(['#d53e4f', '#f46d43', '#abdda4', '#66c2a5', '#3288bd']);
+    .range(['#fa9fb5', '#b3de69', '#fdb462', '#80b1d3', '#fb8072']);
 
+    let file_name_bar = 'data/companies_groupedbar/companies_withyear_' + value_year + '.csv';
     // reading csv data
-    d3.csv("/data/companies_withyear_2018-2022.csv", function(d, i, columns) {
+    d3.csv(file_name_bar, function(d, i, columns) {
         for (var i = 1, n = columns.length; i < n; ++i)
             d[columns[i]] = +d[columns[i]];
         
@@ -348,34 +352,6 @@ function grouped_bar_method(keys){
             .attr("height", function(d) {
                 return height_grouped_bar - y_grouped_bar(0);
             })
-            // setting up tooltip and interactivity
-            .on("mouseover", function(d) {
-                divTooltip_grouped_bar.style("left", d3.event.pageX + 10 + "px")
-                divTooltip_grouped_bar.style("top", d3.event.pageY - 25 + "px")
-                divTooltip_grouped_bar.style("display", "inline-block")
-                divTooltip_grouped_bar.style("opacity", "0.9");
-                var x = d3.event.pageX,
-                    y = d3.event.pageY;
-                var elements = document.querySelectorAll(":hover");
-                var l = elements.length - 1;
-                var elementData = elements[l].__data__;
-                //console.log(elementData)
-                divTooltip_grouped_bar.html(elementData.key + "<br>" +"Patent Count: " +elementData.value);
-                d3.select(this)
-                    .attr("fill", "#F8786B")
-                    //.style("opacity", "0.7")
-                    .style("stroke", "Black")
-                    .style("stroke-width", "1.8px")
-                    .style("stroke-opacity", "1");
-
-            })
-            .on("mouseout", function(d) {
-                divTooltip_grouped_bar.style("display", "none")
-                d3.select(this).transition().duration(250)
-                    .attr("fill", z(d.key))
-                    //.style("opacity", "1")
-                    .style("stroke-opacity", "0");
-            })
             // setting up transition, delay and duration
             .transition()
             .delay(function(d) {
@@ -412,8 +388,8 @@ function grouped_bar_method(keys){
         // setting up transiton for x axis
         g_grouped_bar.select(".x")
             .transition()
-            .duration(500)
-            .delay(800)
+            .duration(300)
+            .delay(300)
             // setting up full opacity after transition 
             .style("opacity", "1")
             
@@ -440,7 +416,7 @@ function grouped_bar_method(keys){
         g_grouped_bar.select(".y")
             .transition()
             .duration(300)
-            .delay(600)
+            .delay(300)
             // setting up full opacity after transition
             .style("opacity", "1")
 
