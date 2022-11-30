@@ -178,10 +178,6 @@ function update() {
   });
 }
 
-// d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
-//   display(data);
-// });
-
 function call_reset_bubbles(){
   d3.select('#assignee_bargrouped').select("svg").remove();
   var e = document.getElementById("years");
@@ -421,3 +417,11 @@ function grouped_bar_method(keys, value_year){
 
     });
 }
+
+d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
+  display(data);
+});
+
+grouped_bar_method(['Apple Inc.', 'International Business Machines Corporation',
+                    'Sony Corporation', 'Google Inc.', 'Dümmen Group B.V.'], '2018-2022');
+
