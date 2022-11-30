@@ -2,7 +2,7 @@ function generate_onlick_heatMap(nodeclicked_d){
     // set the dimensions and margins of the graph
     var margin_heatmap = {top: 80, right: 25, bottom: 30, left: 40},
     width_heatmap = 450 - margin_heatmap.left - margin_heatmap.right,
-    height_heatmap = 430 - margin_heatmap.top - margin_heatmap.bottom;
+    height_heatmap = 410 - margin_heatmap.top - margin_heatmap.bottom;
 
     d3.select('#dataviz_heatmap').select('svg').remove();
 
@@ -178,3 +178,5 @@ function generate_onlick_heatMap(nodeclicked_d){
     })
 
 }
+
+generate_onlick_heatMap({ 'label': 'Y10'})
