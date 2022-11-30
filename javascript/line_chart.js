@@ -33,7 +33,7 @@ d3.csv("data/trend.csv", function(data) {
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
 
-      d3.select("#states")
+    d3.select("#states")
       .selectAll('stateOptions')
       .data(allState)
       .enter()
@@ -41,45 +41,37 @@ d3.csv("data/trend.csv", function(data) {
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; })
 
-      document.getElementById("states").value = allState[0]
+    // document.getElementById("states").value = allState[0]
 
-      document.getElementById("selectButton").value = allGroup[0]
+    // document.getElementById("selectButton").value = allGroup[0]
 
     // A color scale: one color for each group
     var myColor = d3.scaleOrdinal()
       .domain(allGroup)
-      .range(d3.schemeSet1);
+      .range(d3.schemeCategory10);
 
     // Add X axis --> it is a date format
 
 
-    var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.year; }))
-      .range([ 0, width ]);
+    var x = d3.scaleTime()
+              .range([ 0, width ]);
+    
+    var xAxis =  d3.axisBottom().scale(x).tickSizeOuter(0).tickFormat(d3.format("d"));
+
     svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(7));
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class","myXaxis")
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.n; })])
       .range([ height, 0 ]);
-    svg.append("g")
-        .call(d3.axisLeft(y).ticks(7));
+    var yAxis = d3.axisLeft().scale(y).tickSizeOuter(0);
     
+    svg.append("g")
+        .attr("class","myYaxis")
 
     // Initialize line with first group of the list
-    var line = svg
-      .append('g')
-      .append("path")
-        .datum(data.filter(function(d){return d.name==allGroup[0]}))
-        .attr("d", d3.line()
-          .x(function(d) { return x(d.year) })
-          .y(function(d) { return y(d.n) })
-        )
-        .attr("stroke", function(d){ return myColor("valueA") })
-        .style("stroke-width", 4)
-        .style("fill", "none")
+    
 
     // A function that update the chart
     function update(selectedGroup, selectedStateOption) {
@@ -87,26 +79,59 @@ d3.csv("data/trend.csv", function(data) {
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.name==selectedGroup})
 
-      var dataArray = []
-
+      var dataArray = {}
+      var dataResultset = []
       for(let i = 0; i < data.length; i++) {
         if(data[i].name === selectedGroup && data[i].state === selectedStateOption){
-          dataArray.push(data[i]);
+          const year_in = parseInt(data[i].year)
+          if(!(year_in in dataArray)){
+            dataArray[year_in] = {'count': 0};
+          }
+          dataArray[year_in]['count'] += parseInt(data[i].n);
         }
       }
 
+      for(let year in dataArray) {
+        const tempObj = {
+          'year': parseInt(year),
+          'count': dataArray[year]['count']
+        };
+    
+        dataResultset.push(tempObj);
+      }
 
+      console.log("dataResultset", dataResultset)
+      if(dataResultset.length <= 1) {
+        alert("No data for " + selectedStateOption + " in " + selectedGroup);
+      }
 
-      // Give these new data to update line
-      line
-          .datum(dataArray)
+      x.domain(d3.extent(dataResultset, function(d) { return d.year; }));
+
+      svg.selectAll(".myXaxis").transition()
+          .duration(300)
+          .call(xAxis);
+
+      y.domain([0, d3.max(dataResultset, function(d) { return d.count; })])
+      
+      svg.selectAll(".myYaxis")
           .transition()
-          .duration(1000)
-          .attr("d", d3.line()
-            .x(function(d) { return x(d.year) })
-            .y(function(d) { return y(d.n) })
-          )
-          .attr("stroke", function(d){ return myColor(selectedGroup) })
+          .duration(300)
+          .call(yAxis);
+
+      d3.selectAll(".line_path").remove();
+
+      var line = svg
+                  .append('g')
+                  .attr("class","line_path")
+                  .append("path")
+                    .datum(dataResultset)
+                    .attr("d", d3.line()
+                      .x(function(d) { return x(d.year) })
+                      .y(function(d) { return y(d.count) })
+                    )
+                    .attr("stroke", function(d){ return myColor(selectedGroup) })
+                    .style("stroke-width", 4)
+                    .style("fill", "none");
     }
 
     // When the button is changed, run the updateChart function
@@ -114,7 +139,9 @@ d3.csv("data/trend.csv", function(data) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value")
         var selectedStateOption = document.getElementById("states").value
-        update(selectedOption, selectedStateOption)
+        if(selectedOption !== 'Select' && selectedStateOption !== 'Select'){
+          update(selectedOption, selectedStateOption)
+        }
     })
 
 
@@ -127,16 +154,20 @@ d3.csv("data/trend.csv", function(data) {
       } else {
         selectedOption = document.getElementById("selectButton").value
       }
-      update(selectedOption, selectedStateOption)
+      if(selectedOption !== 'Select' && selectedStateOption !== 'Select'){
+        update(selectedOption, selectedStateOption)
+      }
+      
     })
 
    d3.select("#dropdown").on("change", function(d) {
     // recover the option that has been chosen
     var selectedOption = d3.select(this).property("value")
     var selectedStateOption = document.getElementById("states").value
-    update(selectedOption, selectedStateOption)
-    })
+    if(selectedOption !== 'Select' && selectedStateOption !== 'Select'){
+      update(selectedOption, selectedStateOption)
+    }
+  })
    
 
 })
-
