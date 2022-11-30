@@ -29,12 +29,36 @@ header {
 div {
   position: absolute;
 }
+
+.vl {
+  border-left: 3px solid black;
+  height: 815px;
+  overflow:hidden;
+  left: 34%;
+  margin-left: -3px;
+  top: 0;
+}
+hr.new1 {
+  border-top: 3px solid black;
+  position: absolute;
+  width:66%;
+  margin-left: 34%;
+  margin-top: 28%;
+
+}
+
+hr.new4 {
+  width: 69%;
+  margin-left: 34%;
+  height: 1px;
+  border: 2px solid red;
+}
 #patent_map_view {
   top: 0;
   left: 0;
 }
 #trends_cpc_classes_and_types {
-  top: 50%;
+  top: 49%;
   left: 0;
 }
 #relation_between_cpc_classes {
@@ -57,6 +81,7 @@ div {
   height:100%;
   width:50%;
 } */
+
 
 #assignee_bargrouped {
   top: 50%;
