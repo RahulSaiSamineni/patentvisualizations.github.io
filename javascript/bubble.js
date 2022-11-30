@@ -45,7 +45,8 @@ function bubbleChart(class_name, data) {
     function createNodes(rawData) {
       // use max size in the data as the max in the scale's domain
       // note we have to ensure that size is a number
-      const maxSize = d3.max(rawData, d => +(d.patent_counts*1.5));
+      console.log("rawData: ", rawData)
+      const maxSize = d3.max(rawData, d => +(d.patent_counts * 1.5));
   
       // size bubbles based on area
       const radiusScale = d3.scaleSqrt()
@@ -403,7 +404,6 @@ function grouped_bar_method(keys, value_year){
             .attr("y", -15)
             .attr("dy", "0.32em")
             .text(function(d) {
-                // console.log(d);
                 return d;
             });
         // setting transition delay and duration for all individual elements for the legend    
@@ -418,7 +418,7 @@ function grouped_bar_method(keys, value_year){
     });
 }
 
-d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(error, data){
+d3.csv('/data/companies_bubble/companies_2018-2022.csv', function(data){
   display(data);
 });
 
