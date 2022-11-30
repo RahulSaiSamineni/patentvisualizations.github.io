@@ -94,7 +94,7 @@ function bubbleChart(class_name, data) {
       tooltip
         .style("opacity", 1)
         .style("position", 'absolute')
-        .html("Organization: " + d.organization)
+        .html("<strong>Organization: </strong>" + d.organization + "</br> <strong>Patent Count: </strong>" + d.patent_counts)
         .style("left", (d3.mouse(this)[0]+30) + "px")
         .style("top", (d3.mouse(this)[1]+30) + "px")
     }
