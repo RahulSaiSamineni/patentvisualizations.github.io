@@ -45,7 +45,6 @@ function bubbleChart(class_name, data) {
     function createNodes(rawData) {
       // use max size in the data as the max in the scale's domain
       // note we have to ensure that size is a number
-      console.log("rawData: ", rawData)
       const maxSize = d3.max(rawData, d => +(d.patent_counts * 1.5));
   
       // size bubbles based on area
