@@ -1,13 +1,13 @@
 function generateMapStates() {
-    var width = 550;
+    var width = 500;
     var height = 520;
-    var class1 = '#ef8a62' //H01
-    var class2 = '#e5f5e0' //A61
-    var class3 = '#a1d99b' //H04
-    var class4 = '#31a354' //G06
+    var class1 = '#bc80bd' //H01
+    var class2 = '#ffed6f' //A61 
+    var class3 = '#fb8072' //H04
+    var class4 = '#b3de69' //G06
 var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2]) 
-    .scale([700]); 
+    .scale([650]); 
 var toggle = 0
     toggle = 0
     var path = d3.geoPath()
@@ -98,7 +98,7 @@ var toggle = 0
                     +"<div id='tipDiv'></div><br>"
                 });
             svg.call(tip);
-            var ramp = d3.scaleSequential(d3.interpolateOrRd).domain([minVal, maxVal/4])
+            var ramp = d3.scaleSequential(d3.interpolateBlues).domain([minVal, maxVal/4])
 
             var div = d3.select("body").append("div")
                 .attr("class", "tooltip")
@@ -207,7 +207,7 @@ var toggle = 0
             
             axisBottom = g => g
                 .attr("class", `x-axis`)
-                .attr("transform", `translate(-10,340)`)
+                .attr("transform", `translate(-10,310)`)
                 .call(d3.axisBottom(axisScale)
                     .ticks(width / 80)
                     .tickSize(10)
@@ -223,7 +223,7 @@ var toggle = 0
                 .attr("stop-color", d => d.color);
 
             svg.append('g')
-                .attr("transform", `translate(-10,330)`)
+                .attr("transform", `translate(-10,310)`)
                 .append("rect")
                 .attr('transform', `translate(${margin.left}, 0)`)
                 .attr("width", width - margin.right - margin.left)
