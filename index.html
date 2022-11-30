@@ -59,12 +59,12 @@
       <br>
       <select id="states">
         <!-- Dropdown to select popular cpc classes -->
-        <option value="">--Select State--</option>
+        <option value="Select">--Select State--</option>
 
        </select>
       <select id="dropdown" >
           <!-- Dropdown to select popular cpc classes -->
-          <option value="">--Select CPC Class--</option>
+          <option value="Select">--Select CPC Class--</option>
           <option value="A61">A61</option>
           <option value="H04">H04</option>
           <option value="H01">H01</option>
@@ -72,7 +72,7 @@
       </select>
       <select id="selectButton">
         <!-- Dropdown to selece various types of patents -->
-          <option value="">--Select Patent Types--</option>
+          <option value="Select">--Select Patent Types--</option>
 
       </select>
     </form>
@@ -86,6 +86,8 @@
   <!-- Container that shows the relationship between various cpc classes via a network graph and 
   on click of the selected nodes gives the in detailed view of the relational wrt to patent counts 
   in radial column plot. -->
+  <div class="vl"></div>
+
   <div id="relation_between_cpc_classes">
     <h4><b>Relationship between different CPC classes</b></h4><br><br>
     <!-- Sample network graph and radial column plot -->
@@ -97,6 +99,8 @@
   <div id="heat_map" class="heat_map">
     <div id = "dataviz_heatmap" ></div>
   </div>
+ 
+  <hr class="new1">
 
   <div id="assigne_stock">
     <h4><b>Published patents by Top 20 Companies</b></h4>
@@ -119,6 +123,7 @@
     <div id = "bubble_org" class="bubble_org"></div>
     </div>
   </div>
+
   <div id = "assignee_bargrouped">
     <h4><b>Comparision of 5 selected companies</b></h4>
     <div class="tooltip_grouped_bar"></div>
