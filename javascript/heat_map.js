@@ -2,7 +2,7 @@ function generate_onlick_heatMap(nodeclicked_d){
     // set the dimensions and margins of the graph
     var margin_heatmap = {top: 80, right: 25, bottom: 30, left: 40},
     width_heatmap = 450 - margin_heatmap.left - margin_heatmap.right,
-    height_heatmap = 450 - margin_heatmap.top - margin_heatmap.bottom;
+    height_heatmap = 430 - margin_heatmap.top - margin_heatmap.bottom;
 
     d3.select('#dataviz_heatmap').select('svg').remove();
 
@@ -101,7 +101,7 @@ function generate_onlick_heatMap(nodeclicked_d){
                     Math.max.apply(Math, split_color_range_values[1]),
                     Math.max.apply(Math, split_color_range_values[0]),
                 ])
-                .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
+                .range(['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b']);
     } else {
         myColor = d3.scaleOrdinal()
                 .domain([
@@ -115,7 +115,7 @@ function generate_onlick_heatMap(nodeclicked_d){
                     Math.max.apply(Math, split_color_range_values[1]),
                     Math.max.apply(Math, split_color_range_values[0]),
                 ])
-                .range(['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d']);
+                .range(['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b']);
     }
     // d3.scaleSequential()
     //     .interpolator(d3.interpolateYlOrRd)
@@ -177,10 +177,11 @@ function generate_onlick_heatMap(nodeclicked_d){
         .on("mouseleave", mouseleave)
 
         svg_heatMap.append("text")
+        .attr("class","text_heatmap")
         .attr("x", 0)
-        .attr("y", -50)
+        .attr("y", -40)
         .attr("text-anchor", "left")
-        .style("font-size", "18px")
+        .style("font-size", "17px")
         .style("font-weight","700")
         .text(cpc_class_selected + " Pairs HeatMap");
     })
@@ -204,4 +205,3 @@ function generate_onlick_heatMap(nodeclicked_d){
     //         .text("A short description of the take-away message of this chart.");
 
 }
-
